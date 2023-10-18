@@ -1,7 +1,8 @@
 package com.example.tipcalculator
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tipcalculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -11,32 +12,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val firstFragment = FirstFragment()
-        val secondFragment = SecondFragment()
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flfragment,firstFragment)
-            commit()
-        }
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.button.setOnClickListener{
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flfragment,firstFragment)
-                addToBackStack(null)
-                commit()
-            }
-        }
-
-        binding.button2.setOnClickListener{
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flfragment,secondFragment)
-                addToBackStack(null)
-                commit()
-            }
+        intent = Intent(this, SecondActivity::class.java)
+        binding.button3.setOnClickListener{
+            intent.putExtra("name",binding.nameText.text.toString())
+            startActivity(intent)
         }
     }
-
 }

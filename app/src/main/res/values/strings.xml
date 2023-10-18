@@ -3,7 +3,11 @@
     <string name="how_was_the_service">How was the service ?</string>
     <string name="amazing_service">Amazing service (20%)</string>
     <string name="good_service">Good service (18%)</string>
-    <string name="ok_service">Ok service (15%)</string>
+    <string name="ok_service">OK service (15%)</string>
     <string name="calculate">Calculate</string>
     <string name="Second_Fragment">Second Fragment</string>
+    <string name="submit">Submit</string>
+    <string name="search">Search Bar</string>
+    <string name="search_text">Enter the text to search</string>
+    <string name="tip_calculator">Tip Calculator</string>
 </resources>
