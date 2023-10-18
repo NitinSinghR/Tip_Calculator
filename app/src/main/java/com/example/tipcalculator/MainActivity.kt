@@ -3,8 +3,6 @@ package com.example.tipcalculator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tipcalculator.databinding.ActivityMainBinding
-import java.text.NumberFormat
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,35 +11,32 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val firstFragment = FirstFragment()
+        val secondFragment = SecondFragment()
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flfragment,firstFragment)
+            commit()
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.calculateButton.setOnClickListener { calculateTip() }
-    }
-
-    fun calculateTip(){
-        var serviceCost = binding.CostService.text.toString()
-        val cost = serviceCost.toDoubleOrNull()
-
-        if (cost == null || cost == 0.0) {
-            displayTip(0.0)
-            return
+        binding.button.setOnClickListener{
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flfragment,firstFragment)
+                addToBackStack(null)
+                commit()
+            }
         }
 
-        val tipPercentage = when (binding.tipOptions.checkedRadioButtonId) {
-            R.id.option_twenty_percent -> 0.20
-            R.id.option_eighteen_percent -> 0.18
-            else -> 0.15
+        binding.button2.setOnClickListener{
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flfragment,secondFragment)
+                addToBackStack(null)
+                commit()
+            }
         }
-
-        var tip = tipPercentage * cost
-
-        displayTip(tip)
-    }
-
-    fun displayTip (tip:Double) {
-        val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
-        binding.tipResult.text = "Tip Amount : $formattedTip"
     }
 
 }
