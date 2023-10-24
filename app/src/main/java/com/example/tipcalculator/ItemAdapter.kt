@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ItemAdapter(itemList: MutableList<search>, itemDao: searchDao) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
@@ -30,11 +32,14 @@ class ItemAdapter(itemList: MutableList<search>, itemDao: searchDao) :
 
         holder.deleteButton.setOnClickListener { v ->
             Log.i("MYTAG","Delete")
-            try{
-                itemDao.deleteSearch(item)
-            }catch (e: Exception){
-                Log.i("MYTAG","Haven't deleted yet ${e.message.toString()}")
+            GlobalScope.launch {
+                try{
+                    itemDao.deleteSearch(item)
+                }catch (e: Exception){
+                    Log.i("MYTAG","Haven't deleted yet ${e.message.toString()}")
+                }
             }
+
 //            itemList.remove(item)
 //            notifyDataSetChanged()
         }
