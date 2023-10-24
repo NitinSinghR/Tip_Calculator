@@ -27,5 +27,3 @@ abstract class searchDatabase : RoomDatabase(){
     }
     abstract fun searchDao(): searchDao
 }
-
-
